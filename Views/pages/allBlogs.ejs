@@ -1,0 +1,48 @@
+<% layout("./Layouts/boilerplate.ejs") %>
+
+    <div class="row">
+        <h3 class="mb-4 mt-4 text-center">All Blogs</h3>
+
+        <div class="row
+        col-lg-8 offset-lg-2 
+        col-md-8 offset-md-2
+        col-sm-8 offset-sm-2  
+        d-flex justify-content-center">
+
+
+            <% AllBlogsData.forEach(blog=> { %>
+                <a href="/showBlog/<%= blog._id %>" style="text-decoration:none;" class="
+                    col-lg-4 
+                    col-md-6 
+                    col-sm-12  
+                    d-flex justify-content-center">
+
+                    <div class="blog-card">
+                        <img src="<%= blog.coverImage.url %>" alt="Cover Image" class="blog-image">
+
+                        <div class="blog-content">
+                            <span class="category-badge">
+                                <%= blog.category %>
+                            </span>
+                            <h4 class="mt-2 text-dark">
+                                <%= blog.title %>
+                            </h4>
+                            <p class="text-muted">
+                                <%= blog.content.length> 100 ? blog.content.substring(0, 100) + '...' :
+                                    blog.content %>
+                            </p>
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="meta">
+                                    <i class="bi bi-calendar-event"></i>
+                                    <%= blog.createdAt.toDateString() %>
+                                </div>
+                                <div class="meta">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <% }) %>
+        </div>
+    </div>

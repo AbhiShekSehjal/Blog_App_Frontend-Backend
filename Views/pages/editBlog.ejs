@@ -1,0 +1,27 @@
+<% layout("./Layouts/boilerplate.ejs") %>
+
+  <div class="editFormContainer">
+    <h2>Edit Blog</h2>
+    <form action="/showBlog/<%= findBlog.id %>?_method=PATCH" method="POST">
+      <label for="title">Blog Title</label>
+      <input type="text" id="title" name="title" value="<%= findBlog.title %>" required>
+
+      <label for="image">Image URL</label>
+      <input type="url" id="image" name="coverImage" value="<%= findBlog.coverImage %>">
+
+      <label for="category">Category</label>
+      <select id="category" name="category">
+        <option value="technology" name="category">Technology</option>
+        <option value="sports" name="category">Sports</option>
+        <option value="fashion" name="category">Fashion</option>
+        <option value="health" name="category">Health</option>
+      </select>
+
+      <label for="content">Blog Content</label>
+      <textarea id="content" name="content" required><%= findBlog.content %></textarea>
+
+      <button class="editSubmitBtn" type="submit">Update Blog</button>
+    </form>
+
+    <a class="back-link" href="/allBlogs">← Cancel and go back</a>
+  </div>

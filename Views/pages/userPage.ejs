@@ -1,0 +1,90 @@
+<% layout("./Layouts/boilerplate.ejs") %>
+
+  <div class="profile-container">
+    <div class="upperProfileContainer"></div>
+    <img src="<%= user.profilePic %>" alt="Profile Picture" id="profile-pic">
+
+    <div class="username">@<%= user.username %>
+    </div>
+    <div class="email">
+      <%= user.email %>
+    </div>
+
+    <% if (currentUser && currentUser._id.toString() !==user._id.toString()) { %>
+      <form action="/follow/<%= user._id %>" method="POST">
+        <%if(!user.followers.includes(currentUser._id)){%>
+          <button class="follow-btn">
+            Follow
+          </button>
+          <% }%>
+      </form>
+      <% } %>
+  </div>
+
+  <div class="middleProfileContainer">
+    <div class="bio" style="text-align: center;">
+      <span class="label">Bio:</span><br>
+      <%= user.bio || 'No bio available.' %>
+    </div>
+
+    <div class="gender" style="text-align: center;">
+      <span class="label">Gender:</span><br>
+      <%= user.gender || 'No gender available.' %>
+    </div>
+
+    <div class="dob" style="text-align: center;">
+      <span class="label">Birthday:</span><br>
+      <%= user.dob ? user.dob.toDateString() : 'No date of birth available.' %>
+    </div>
+  </div>
+
+
+  <div class="lowerProfileContainer">
+    <div id="followers-count"  style="text-align: center;">
+      <p>
+        <%= user.followers.length %>
+      </p>
+      <div class="label">Followers</div>
+    </div>
+
+    <div id="following-count"  style="text-align: center;">
+      <p>
+        <%= user.following.length %>
+          <div class="label">Following</div>
+      </p>
+    </div>
+
+    <div id="followersList">
+      <ul style="list-style:circle">
+        <strong style="text-align: center;">Followers</strong>
+        <% for (follower of user.followers) { %>
+
+          <li class="mb-3 mt-3">
+
+            <a href="/user/<%= follower._id %>" style="text-decoration: none;">
+              <img src="<%= follower.profilePic %>" alt="profile"
+                style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover;">
+              <%= follower.username %>
+            </a>
+          </li>
+          <% } %>
+      </ul>
+    </div>
+
+    <div id="followingList">
+      <ul style="list-style:circle">
+        <strong style="text-align: center;">Followings</strong>
+        <% for (following of user.following) { %>
+
+          <li class="mb-3 mt-3">
+            <a href="/user/<%= following._id %>" style="text-decoration: none;">
+              <img src="<%= following.profilePic %>" alt="profile"
+                style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover;">
+              <%= following.username %>
+            </a>
+          </li>
+          <% } %>
+      </ul>
+    </div>
+
+  </div>

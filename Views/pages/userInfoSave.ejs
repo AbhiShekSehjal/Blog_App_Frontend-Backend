@@ -1,0 +1,23 @@
+<% layout("./Layouts/boilerplate.ejs") %>
+
+    <h2>Complete Your Profile</h2>
+    <form action="/completeProfile/<%= registeredUser._id %>" method="POST" style="width: 60vw; margin-left: 100px;">
+        <label for="profilePic">Profile Picture:</label>
+        <input type="text" name="profilePic" required><br><br>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" name="dob" required><br><br>
+
+        <label for="gender">Gender:</label>
+        <select name="gender" required>
+            <option value="">Select...</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+
+        <label for="bio">Short Bio:</label><br>
+        <textarea name="bio" rows="4" cols="50"></textarea><br><br>
+
+        <button type="submit">Save Profile</button>
+    </form>
