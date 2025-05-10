@@ -15,7 +15,7 @@
             <li class="navbar-item flexbox-left">
                 <a class="navbar-item-inner flexbox-left" href="/user/<%= currentUser._id %>">
                     <div class="navbar-item-inner-icon-wrapper flexbox">
-                        <img src="<%= currentUser.profilePic %>" alt="userImage"
+                        <img src="<%= currentUser.profilePic.url %>" alt="userImage"
                             style="border-radius: 50%; width: 30px; height: 30px; object-fit: cover;">
                     </div>
                     <span class="link-text">
@@ -26,14 +26,14 @@
             <% } %>
 
 
-                <li class="navbar-item flexbox-left">
+                <!-- <li class="navbar-item flexbox-left">
                     <a class="navbar-item-inner flexbox-left">
                         <div class="navbar-item-inner-icon-wrapper flexbox">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                         <span class="link-text">Search</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="navbar-item flexbox-left">
                     <a class="navbar-item-inner flexbox-left" href="/">
                         <div class="navbar-item-inner-icon-wrapper flexbox">

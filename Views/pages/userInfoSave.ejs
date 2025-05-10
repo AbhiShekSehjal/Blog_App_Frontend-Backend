@@ -1,9 +1,10 @@
 <% layout("./Layouts/boilerplate.ejs") %>
 
     <h2>Complete Your Profile</h2>
-    <form action="/completeProfile/<%= registeredUser._id %>" method="POST" style="width: 60vw; margin-left: 100px;">
+    <form action="/completeProfile/<%= registeredUser._id %>" method="POST" style="width: 60vw; margin-left: 100px;"
+        enctype="multipart/form-data">
         <label for="profilePic">Profile Picture:</label>
-        <input type="text" name="profilePic" required><br><br>
+        <input type="file" name="profilePic" id="profilePic" required><br><br>
 
         <label for="dob">Date of Birth:</label>
         <input type="date" name="dob" required><br><br>
@@ -19,5 +20,5 @@
         <label for="bio">Short Bio:</label><br>
         <textarea name="bio" rows="4" cols="50"></textarea><br><br>
 
-        <button type="submit">Save Profile</button>
+        <button type="submit" class="btn btn-success">Save Profile</button>
     </form>

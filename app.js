@@ -239,17 +239,20 @@ app.get("/user/:id", async (req, res) => {
 })
 
 // completeProfile route
-app.post("/completeProfile/:id", async (req, res) => {
+app.post("/completeProfile/:id", upload.single("profilePic"), async (req, res) => {
     try {
 
         let { id } = req.params;
-        let { profilePic, gender, bio, dob } = req.body;
+        let { gender, bio, dob } = req.body;
+        let url = req.file.path;
+
+        let filename = req.file.filename;
 
         let updatedUser = {
-            profilePic: profilePic,
             gender: gender,
             bio: bio,
-            dob: dob
+            dob: dob,
+            profilePic: { url, filename }
         }
 
         let user = await Users.findByIdAndUpdate(id, updatedUser, { new: true, runValidators: true });

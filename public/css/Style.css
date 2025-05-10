@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #44444428;
 }
 
@@ -32,6 +32,7 @@ body{
     width: 5em;
     height: 100vh;
     left: 0;
+    top: 0;
     position: fixed;
     transition: width 0.6s ease;
     background: rgb(255, 119, 0);
@@ -101,7 +102,7 @@ body{
     }
 
     #navbar:hover {
-        width: 11em;
+        width: 3.5em;
     }
 }
 
@@ -136,10 +137,6 @@ body{
 .meta {
     font-size: 0.85rem;
     color: #6c757d;
-}
-
-@media screen {
-    
 }
 
 /* create new blog page -------------- */
