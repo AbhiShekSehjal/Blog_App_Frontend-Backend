@@ -1,85 +1,71 @@
 <% layout("./Layouts/boilerplate.ejs") %>
 
-    <div class="container-fluid row">
-        <div class="showBlogPage col-11 offset-1">
-            <div class="showBlogPageBlogTitle">
+    <div class="row forMobileDesign">
+        <div class="row
+        col-lg-8 offset-lg-2 
+        col-md-8 offset-md-2
+        col-sm-8 offset-sm-2  
+        d-flex justify-content-center">
+            <div class="showBlogPageBlogTitle  mt-5">
                 <%= findBlog.title %>
+                    <div class="urnderline mb-4"></div>
             </div>
+
 
             <% if (findBlog.coverImage) { %>
                 <img class="showBlogPageBlogImage" src="<%= findBlog.coverImage.url %>" alt="Blog Cover">
                 <% } %>
 
+                    <br>
+                    <br>
+                    <span class="showBlogPageBlogCategory">
+                        <%= findBlog.category %>
+                    </span>
+
+                    <br>
+
                     <div class="showBlogPageBlogContent">
                         <%= findBlog.content %>
                     </div>
 
-                    <b>Posted by :
+
+
+                    <!-- <button id="showMoreContent">Show more</button> -->
+
+                    <b>
+                        <img src="<%= findBlog.user.profilePic.url %>" alt="user profile pic!"
+                            style="border-radius: 50%; height: 40px; width: 40px; object-fit: cover;">
                         <a href="/user/<%= findBlog.user._id %>" style="text-decoration: none;">
-                            <i>
-                                &nbsp;&nbsp;&nbsp; <%= findBlog.user.username %>
-                            </i>
-                            &nbsp;&nbsp;
-                            <img src="<%= findBlog.user.profilePic %>" alt="user profile pic!"
-                                style="border-radius: 50%; height: 50px; width: 50px; object-fit: cover;">
+                            <%= findBlog.user.username %>
                         </a>
                     </b>
-                    <br>
                     <br>
 
 
                     <div id="likes-count">
                         <p>
-                            <%= findBlog.likes.length %>
+
+                        <form action="/findBlog/<%= findBlog._id %>/like" method="POST">
+                            <button class="btn">
+                                <i class="fa-solid fa-thumbs-up"></i>&nbsp;&nbsp;<%= findBlog.likes.length %>
+                            </button>
+                        </form>
+
+                        <button class="btn">
+                            <a href="#comments" style="text-decoration: none; color: black;"><i
+                                    class="fa-solid fa-comment-dots"></i>
+                                &nbsp;
+                                <%= findBlog.comments.length %>
+                            </a>
+                        </button>
                         </p>
-                        <div class="label">Likes</div>
                     </div>
 
-                    <form action="/findBlog/<%= findBlog._id %>/like" method="POST">
-                        <br>
-                        <button class="btn btn-primary">
-                            <i class="fa-solid fa-thumbs-up"></i>
-                        </button>
-                    </form>
-
-                    
-                    <!-- <div id="likesList">
-                        <ul style="list-style:circle">
-                            <strong style="text-align: center;">All Likes</strong>
-                            <% for (like of findBlog.likes) { %>
-
-                                <li class="mb-3 mt-3">
-
-                                    <a href="/user/<%= like.from._id %>" style="text-decoration: none;">
-                                        <img src="<%= like.from.profilePic %>" alt="profile"
-                                            style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover;">
-                                        <%= like.from.username %>
-                                    </a>
-                                </li>
-                                <% } %>
-                        </ul>
-                    </div> -->
-
-
-
-
+                    <br>
 
                     <br>
-                    <br>
-                    <small><b>Blog ID : </b>
-                        <%= findBlog._id %>
-                    </small>
-
-                    <br>
-                    <br>
-                    <span
-                        style="background-color: orange; padding: 1px 6px; border-radius: 10px; font-weight: 600; color: white;">
-                        <%= findBlog.category %>
-                    </span>
-
-                    <br>
-                    <br>
-                    <i><b>Created At : </b>
+                    <b>Created At : </b>
+                    <i>
                         <%= findBlog.createdAt %>
                     </i>
 
@@ -88,22 +74,25 @@
                     <a href="/allBlogs" class="back-link">← Back to all blogs</a>
 
                     <br>
+                    <br>
+                    <br>
 
                     <form action="/findBlog/<%= findBlog._id %>/comment" method="POST" class="row">
                         <label for="comments">Leave comment</label>
-                        <input type="text" name="comments" id="comments">
-                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-share"></i></button>
+                        <input type="text" name="comments" id="comments" class="form-control mb-3 mt-3"
+                            placeholder="Write comment !">
+                        <button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-share"></i></button>
                     </form>
 
                     <br>
                     <br>
-                    <h5>Comments</h5>
+                    <h5 class="mt-5 mb-2">Comments</h5>
                     <ul class="list-unstyled">
                         <% for (let comment of findBlog.comments) { %>
                             <li class="mb-2">
                                 <strong>
                                     <a href="/user/<%= comment.from._id %>" style="text-decoration: none;">
-                                        <img src="<%= comment.from.profilePic %>" alt="profile"
+                                        <img src="<%= comment.from.profilePic.url %>" alt="profile"
                                             style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover;">
                                         <%= comment.from.username %>
                                     </a>
@@ -117,10 +106,13 @@
                         <br>
                         <br>
                         <form action="/deleteBlog/<%= findBlog._id %>/?_method=DELETE" method="POST"><button
-                                class="btn btn-danger btn-sm font-weight-bold">Delete</button></form>
+                                class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                        <br>
                         <br>
                         <form action="/editBlog/<%= findBlog._id %>" method="GET"><button
-                                class="btn btn-warning btn-sm text-light font-weight-bold">Edit</button></form>
+                                class="btn btn-outline-warning btn-sm">Edit</button>
+                        </form>
                         <% } %>
 
 
@@ -129,11 +121,22 @@
 
 
 
-        <h2 class="mb-4 text-center">Similar Blogs</h2>
+    </div>
 
-        <div class="row col-11">
+    <div class="row forMobileDesign">
+        <h2 class="mb-4 mt-4 text-center">Similar Blogs</h2>
+
+        <div class="row
+        col-lg-8 offset-lg-2 
+        col-md-8 offset-md-2
+        col-sm-8 offset-sm-2  
+        d-flex justify-content-center">
+
             <% allBlogs.forEach(blog=> { %>
-                <a href="/showBlog/<%= blog._id %>" class="col-md-6 col-lg-4" style="text-decoration:none;">
+                <a href="/showBlog/<%= blog._id %>" class="col-lg-4 
+                    col-md-6 
+                    col-sm-12  
+                    d-flex justify-content-center" style="text-decoration:none;">
                     <div class="blog-card">
                         <img src="<%= blog.coverImage.url %>" alt="Cover Image" class="blog-image">
 
@@ -155,8 +158,9 @@
                                     <%= blog.createdAt.toDateString() %>
                                 </div>
                                 <div class="meta">
-                                    <i class="fa-regular fa-thumbs-up"></i>
-                                    · <i class="fa-regular fa-comment-dots"></i>
+                                    <i class="fa-regular fa-thumbs-up">&nbsp;&nbsp;<%= blog.likes.length %></i>
+                                    · <i class="fa-regular fa-comment-dots">&nbsp;&nbsp;<%= blog.comments.length %>
+                                    </i>
 
                                 </div>
                             </div>

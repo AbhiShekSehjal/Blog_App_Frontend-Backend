@@ -1,7 +1,7 @@
 <% layout("./Layouts/boilerplate.ejs") %>
 
-    <div class="row">
-        <h3 class="mb-4 mt-4 text-center">All Blogs</h3>
+    <div class="row forMobileDesign">
+        <h3 class="mb-4 mt-4 text-center">Today's special Blogs</h3>
 
         <div class="row
         col-lg-8 offset-lg-2 
@@ -38,6 +38,9 @@
                                     <%= blog.createdAt.toDateString() %>
                                 </div>
                                 <div class="meta">
+                                    <i class="fa-regular fa-thumbs-up">&nbsp;&nbsp;<%= blog.likes.length %></i>
+                                    · <i class="fa-regular fa-comment-dots">&nbsp;&nbsp;<%= blog.comments.length %>
+                                    </i>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,33 @@
 <% layout("./Layouts/boilerplate.ejs") %>
 
     <!-- Header -->
+
+    <div class="d-flex gap-5 list-style-none p-3 position-fixed top-0 end-0">
+        <% if(!currentUser) {%>
+            <button class="ms-auto authBtns">
+                <a href="/login">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span class="">Log In</span>
+                </a>
+            </button>
+            <button class="authBtns">
+                <a href="/signUp">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="">Sign In</span>
+                </a>
+            </button>
+            <% }%>
+
+                <% if(currentUser) {%>
+                    <button class="ms-auto authBtns">
+                        <a href="/logout">
+                            <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
+                            <span class="">Log out</span>
+                        </a>
+                    </button>
+                    <% } %>
+    </div>
+
     <header class="container header">
         <div class="leftSideBox">
             <div class="headingLine">

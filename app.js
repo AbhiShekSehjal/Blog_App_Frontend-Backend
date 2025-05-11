@@ -25,7 +25,7 @@ const User = require("./Models/users");
 const app = express();
 const port = 3000;
 
-const DBURL = "mongodb+srv://shek54112:QyWUfivmbh33Ucgf@cluster0.glvdlr1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const DBURL = process.env.MONGO_URL;
 
 app.engine("ejs", engine);
 
@@ -38,12 +38,12 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/Views"));
 
 app.use(session({
-    secret: "mySecretCode",
+    secret: process.env.SECRET_CODE,
     resave: true,
     saveUninitialized: true,
 
     store: MongoStore.create({
-        mongoUrl: DBURL,
+        mongoUrl: process.env.MONGO_URL,
         collectionName: "sessions"
     }),
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
@@ -71,7 +71,7 @@ main().then((res) => {
 })
 
 async function main() {
-    await mongoose.connect(DBURL);
+    await mongoose.connect(process.env.MONGO_URL);
 }
 
 // home page route
@@ -160,9 +160,23 @@ app.get("/editBlog/:id", async (req, res) => {
 });
 
 // update blog route (patch request)
-app.patch("/showBlog/:id", async (req, res) => {
+app.patch("/showBlog/:id", upload.single("coverImage"), async (req, res) => {
+    let { title, content, category } = req.body;
+
     let { id } = req.params;
-    let updatedBlog = await AllBlogs.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+
+    let url = req.file.path;
+
+    let filename = req.file.filename;
+
+    const updateInfo = {
+        title: title,
+        content: content,
+        category: category,
+        coverImage: { url, filename }
+    }
+
+    let updatedBlog = await AllBlogs.findByIdAndUpdate(id, updateInfo, { new: true, runValidators: true });
     console.log(updatedBlog);
 
     res.redirect(`/showBlog/${id}`)
@@ -350,8 +364,10 @@ app.post("/findBlog/:id/like", async (req, res) => {
     }
 })
 
-// Error handling middleware
-
+// 404 handler (should be the last middleware)
+app.use((req, res, next) => {
+    res.status(404).send('Page not found');
+});
 
 app.listen(port, () => {
     console.log("Server is listening at port : ", port);
