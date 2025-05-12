@@ -27,17 +27,21 @@ This is the Fullstack blog website built using **Node.js**, **Express**, **Mongo
 
 ## 📁 Project Structure
 
-<pre> ```bash Backend/ ├── app.js # Main Express app setup ├── cloudConfig.js # Cloudinary configuration ├── .env # Environment variables ├── package.json # Project dependencies ├── models/ # Mongoose schemas │ └── user.js ├── routes/ # Express routes │ └── auth.js ├── views/ # EJS templates │ └── home.ejs └── public/ # Static assets ``` </pre>
-
+- `app.js` – Main Express app
+- `cloudConfig.js` – Cloudinary setup
+- `routes/` – Contains route files like `auth.js`
+- `models/` – Mongoose schemas
+- `views/` – EJS templates
+- `public/` – Static files (CSS, images)
 
 ---
 
 ## 🔧 Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd Backend
+```bash
+git clone https://github.com/yourusername/your-repo-name.git
+cd Backend
 
 2.Install dependencies:
 ```bash
