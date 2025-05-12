@@ -42,6 +42,7 @@ This is the Fullstack blog website built using **Node.js**, **Express**, **Mongo
 ```bash
 git clone https://github.com/yourusername/your-repo-name.git
 cd Backend
+```
 
 2.Install dependencies:
 ```bash
@@ -56,6 +57,7 @@ CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 SECRET=your_session_secret
 ```
+
 4.Start the development server:
 ```bash
 node app.js
