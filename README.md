@@ -49,22 +49,23 @@ Backend/
    cd Backend
 
 2.Install dependencies:
-
+```bash
 npm install
+```
 
 3.Create a .env file in the root with:
-
+```bash
 DB_URL=your_mongodb_connection_string
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 SECRET=your_session_secret
-
+```
 4.Start the development server:
-
+```bash
 node app.js
-
- License
+```
+![License](https://img.shields.io/badge/license-ISC-blue)
 This project is licensed under the ISC License.
 
 
