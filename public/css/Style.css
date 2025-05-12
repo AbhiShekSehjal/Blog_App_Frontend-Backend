@@ -13,6 +13,29 @@ body {
     background-color: var(--background-color);
 }
 
+/* Custom Scrollbar for Webkit Browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    /* Bootstrap primary color */
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+}
+
+/* Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) #f1f1f1;
+    scroll-behavior: smooth;
+}
+
 /* flash message */
 .alert-dismissible {
     width: 60% !important;
@@ -378,10 +401,33 @@ body {
     line-height: 2;
     white-space: pre-wrap;
     font-family: var(--heading-font);
-    /* height: 200px; */
-    /* height: fit-content; */
-    /* border: 2px solid black;
-    overflow: hidden; */
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.showBlogPageBlogContent::after{
+    content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6em; /* height of the fade effect */
+
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white);
+
+}
+
+#showMoreContent {
+    font-size: 100px;
+    position: absolute;
+    bottom: -8px;
+    color: var(--button-color);
+    cursor: pointer;
+    z-index: 1;
 }
 
 .back-link {

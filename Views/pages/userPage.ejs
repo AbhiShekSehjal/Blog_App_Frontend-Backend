@@ -10,9 +10,9 @@
         <%= user.email %>
       </div>
 
-      <% if (currentUser && currentUser._id.toString() !==user._id.toString()) { %>
+      <% if (currentUser && currentUser._id.toString() !== user._id.toString()) { %>
         <form action="/follow/<%= user._id %>" method="POST">
-          <%if(user.followers.includes(currentUser._id)){%>
+          <%if(!user.followers.includes(currentUser._id)){%>
             <button class="follow-btn">
               Follow
             </button>
@@ -80,7 +80,7 @@
 
           <li class="mb-3 mt-3">
             <a href="/user/<%= following._id %>" style="text-decoration: none;">
-              <img src="<%= following.profilePic %>" alt="profile"
+              <img src="<%= following.profilePic.url %>" alt="profile"
                 style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover;">
               <%= following.username %>
             </a>

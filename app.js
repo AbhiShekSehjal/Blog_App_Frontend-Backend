@@ -25,8 +25,6 @@ const User = require("./Models/users");
 const app = express();
 const port = 3000;
 
-// const DBURL = process.env.MONGO_URL;
-
 app.engine("ejs", engine);
 
 app.use(methodOverride("_method"));
@@ -283,32 +281,36 @@ app.post("/completeProfile/:id", upload.single("profilePic"), async (req, res) =
 
 // /follow user route
 app.post("/follow/:id", async (req, res) => {
-    try {
-        const currentUserId = req.user._id;
-        const targetUserId = req.params.id;
+  try {
+    const currentUserId = req.user._id;
+    const targetUserId = req.params.id;
 
-        if (currentUserId.toString() === targetUserId) {
-            return res.status(400).send("You can't follow yourself");
-        }
-
-        const currentUser = await User.findById(currentUserId);
-        const targetUser = await User.findById(targetUserId);
-
-        if (!targetUser.followers.includes(currentUserId)) {
-            targetUser.followers.push(currentUserId);
-            currentUser.following.push(targetUserId);
-
-            await targetUser.save();
-            await currentUser.save();
-        }
-
-        res.redirect(`/user/${req.params.id}`);
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server error');
+    if (currentUserId.toString() === targetUserId) {
+      return res.status(400).send("You can't follow yourself");
     }
+
+    const currentUser = await User.findById(currentUserId);
+    const targetUser = await User.findById(targetUserId);
+
+    const alreadyFollowing = targetUser.followers.some(
+      followerId => followerId.toString() === currentUserId.toString()
+    );
+
+    if (!alreadyFollowing) {
+      targetUser.followers.push(currentUserId);
+      currentUser.following.push(targetUserId);
+
+      await targetUser.save();
+      await currentUser.save();
+    }
+
+    res.redirect(`/user/${targetUserId}`);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
 });
+
 
 // add comment
 app.post("/findBlog/:id/comment", async (req, res) => {
@@ -366,7 +368,9 @@ app.post("/findBlog/:id/like", async (req, res) => {
 
 // 404 handler (should be the last middleware)
 app.use((req, res, next) => {
-    res.status(404).send('Page not found');
+    res.status(404).render("./pages/page404.ejs");
+    // console.log(req.user);
+
 });
 
 app.listen(port, () => {

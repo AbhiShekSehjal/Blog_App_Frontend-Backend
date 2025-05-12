@@ -26,16 +26,17 @@
 
                     <div class="showBlogPageBlogContent">
                         <%= findBlog.content %>
+                            <% if (findBlog.content.length> 500) { %>
+                                <i class="fa-solid fa-caret-down fa-fade" id="showMoreContent"></i>
+
+                                <% } %>
+
                     </div>
 
-
-
-                    <!-- <button id="showMoreContent">Show more</button> -->
-
                     <b>
-                        <img src="<%= findBlog.user.profilePic.url %>" alt="user profile pic!"
-                            style="border-radius: 50%; height: 40px; width: 40px; object-fit: cover;">
                         <a href="/user/<%= findBlog.user._id %>" style="text-decoration: none;">
+                            <img src="<%= findBlog.user.profilePic.url %>" alt="user profile pic!"
+                                style="border-radius: 50%; height: 40px; width: 40px; object-fit: cover;">
                             <%= findBlog.user.username %>
                         </a>
                     </b>
