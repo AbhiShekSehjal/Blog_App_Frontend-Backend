@@ -1,0 +1,1 @@
+This is the backend for a web application built using **Node.js**, **Express**, **MongoDB**,**EJS**. It includes support for cloud storage using **Cloudinary** and handles file uploads using **Multer**.
