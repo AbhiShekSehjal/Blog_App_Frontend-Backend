@@ -1,4 +1,4 @@
-This is the Fullstack blog website built using **Node.js**, **Express**, **MongoDB**,**EJS** and **Passport.js** for authentication. It includes support for cloud storage using **Cloudinary** and handles file uploads using **Multer**.
+This is the Fullstack blog website built using **Node.js**, **Express**, **MongoDB**, **EJS** and **Passport.js** for authentication. It includes support for cloud storage using **Cloudinary** and handles file uploads using **Multer**.
 
 ---
 
@@ -27,16 +27,7 @@ This is the Fullstack blog website built using **Node.js**, **Express**, **Mongo
 
 ## 📁 Project Structure
 
-Backend/
-├── app.js # Main Express app setup
-├── cloudConfig.js # Cloudinary configuration
-├── .env # Environment variables
-├── package.json # Project metadata and dependencies
-├── public/ # Static files (if present)
-├── routes/ # Express route handlers
-├── models/ # Mongoose schemas
-├── views/ # EJS templates
-└── ...
+<pre> ```bash Backend/ ├── app.js # Main Express app setup ├── cloudConfig.js # Cloudinary configuration ├── .env # Environment variables ├── package.json # Project dependencies ├── models/ # Mongoose schemas │ └── user.js ├── routes/ # Express routes │ └── auth.js ├── views/ # EJS templates │ └── home.ejs └── public/ # Static assets ``` </pre>
 
 
 ---
@@ -65,8 +56,3 @@ SECRET=your_session_secret
 ```bash
 node app.js
 ```
-![License](https://img.shields.io/badge/license-ISC-blue)
-This project is licensed under the ISC License.
-
-
-Would you like help with the frontend `README` as well, if it's part of your project? ​:contentReference[oaicite:0]{index=0}​
